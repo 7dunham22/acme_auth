@@ -26,10 +26,8 @@ app.get('/api/auth', async (req, res, next) => {
 
 app.get('/api/users/:id/notes', async (req, res, next) => {
   try {
-    const user = await User.byToken(req.response.headers.authorization);
-    const urlId = req.params.id;
-    console.log('User: ', user);
-    console.log('urlId: ', urlId);
+    const user = await User.byToken(req.headers.authorization);
+    const urlId = Number(req.params.id);
     if (user.id === urlId) {
       const user = await User.findByPk(urlId, { include: { model: Note } });
       const notes = await user.getNotes();

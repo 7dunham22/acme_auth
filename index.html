@@ -82,7 +82,6 @@
       async signIn(credentials){
         let response = await axios.post('/api/auth', credentials);
         const { token } = response.data;
-        console.log(token);
         window.localStorage.setItem('token', token);
         this.attemptTokenLogin();
       }
